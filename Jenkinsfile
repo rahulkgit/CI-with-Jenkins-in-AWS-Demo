@@ -5,7 +5,10 @@ pipeline {
         stage('CI') {
             steps {
                 echo 'Building..'
-                  mvn package
+                 withMaven(maven : 'MAVEN_LATEST')
+                {
+                   sh ' mvn package'
+                } 
             }
         }
         stage('CD') {
