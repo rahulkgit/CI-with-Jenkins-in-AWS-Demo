@@ -15,11 +15,23 @@ pipeline {
                
         }
         stage('CD') {
-            steps {
-                echo 'Testing..'
+                	steps {
+                        echo 'Testing..'
 
 
-            }
-        }
+                              }
+                    }
+
+
+        stage ('Publish build info') {
+                                 steps {
+                          rtPublishBuildInfo (
+                          serverId: "ARTIFACTORY_SERVER"
+                                 )
+                                         }
+                           }
+
+
+
     }
 }
