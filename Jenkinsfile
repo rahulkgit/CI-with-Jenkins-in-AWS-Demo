@@ -5,6 +5,7 @@ pipeline {
         stage('CI') {
             steps {
                 echo 'Building..'
+                  mvn package
             }
         }
         stage('CD') {
