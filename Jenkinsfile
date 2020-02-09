@@ -17,7 +17,7 @@ pipeline {
         stage('CD') {
                 	steps {
                         echo 'Testing..'
-
+                        sleep(3000)
 
                               }
                     }
