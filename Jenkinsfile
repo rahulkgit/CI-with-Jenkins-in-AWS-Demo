@@ -1,30 +1,29 @@
 pipeline {
     agent any
-
-      tools {
-      // Install the Maven version configured as "M3" and add it to the path.
-      maven "MAVEN_LATEST"
-   }
-    stages {
-        stage('CI') {
-            steps {
-                echo 'Building..'
-                sh "mvn package"            
-
-                  }
-               
-        }
-        stage('CD') {
-                	steps {
-                        echo 'Testing..'
-                        sleep(9)
-
-                              }
-                    }
-
-
-
-
-
+    environment {
+        PROJECT_ID = 'essential-oven-263421'
+        CLUSTER_NAME = 'k8-cluster-rahulk'
+        LOCATION = 'europe-west3-c'
+        CREDENTIALS_ID = 'kubernetes'
     }
+    stages {
+        stage("Checkout code") {
+            steps {
+                checkout scm
+            }
+        }
+		 stage("Build") {
+            steps {
+               echo "cleaning and packaging"
+			   sh 'mvn clean package'
+            }
+        }
+		 stage("Test") {
+            steps {
+                echo "Testing"
+			   sh 'mvn test'
+            }
+        }
+
+     }
 }
