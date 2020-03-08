@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp1
+  name: k8app 
 spec:
   replicas: 2
   selector:
    matchLabels:
-    app: webapp1
+    app: k8app
   template:
     metadata:
       labels:
-        app: webapp1
+        app: k8app
     spec:
       containers:
-      - name: webapp1
+      - name: k8app
         image: rahulk2020/k8image:tagversion
         ports:
         - containerPort: 8080
@@ -22,9 +22,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: webapp1-svc
+  name: k8app-svc
   labels:
-    app: webapp1
+    app: k8app
 spec:
   type: LoadBalancer
   ports:
@@ -32,4 +32,4 @@ spec:
     port: 80
     targetPort: 8080
   selector:
-    app: webapp1
+    app: k8app
