@@ -25,5 +25,14 @@ pipeline {
             }
         }
 
-     }
+       stage("Build image") {
+            steps {
+                script {
+                    myapp = docker.build("rahulk2020/k8s:${env.BUILD_ID}")
+                }
+            }
+        }      
+
+
+  }
 }
