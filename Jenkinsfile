@@ -28,11 +28,20 @@ pipeline {
        stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("rahulk2020/k8s:${env.BUILD_ID}")
+                    myapp = docker.build("rahulk2020/k8image:${env.BUILD_ID}")
                 }
             }
         }      
 
+       stage("Push image") {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-rahulk') {
+                            myapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }      
 
   }
 }
